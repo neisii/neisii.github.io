@@ -1,17 +1,5 @@
 ---
-import Seo from "../components/Seo.astro";
-import "../styles/global.css";
-const { title, description = "" } = Astro.props;
+import BaseLayout from './BaseLayout.astro';
+const { title, description = '' } = Astro.props;
 ---
-<html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <Seo title={`${title} | Astroxx`} description={description} />
-  </head>
-  <body class="bg-white">
-    <main class="prose prose-neutral mx-auto px-4 py-12">
-      <slot />
-    </main>
-  </body>
-</html>
-
+<BaseLayout title={title} description={description}><slot /></BaseLayout>

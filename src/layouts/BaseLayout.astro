@@ -1,19 +1,25 @@
 ---
-const { title = "Astroxx Blog", description = "Zenn 스타일의 미니 블로그" } = Astro.props;
+import Seo from '../components/Seo.astro';
+import '../styles/global.css';
+import { sitePath, siteBase } from '../lib/paths';
+const { title = '개인 아카이브', description = '만든 것과 기록한 생각을 모아두는 개인 아카이브입니다.' } = Astro.props;
+const base = siteBase.replace(/\/$/, '');
+const path = Astro.url.pathname.replace(base, '').replace(/\/$/, '') || '/';
+const nav = [
+  { href: '/', label: '홈' },
+  { href: '/projects/', label: '프로젝트' },
+  { href: '/posts/', label: '글' },
+];
 ---
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
-  </head>
-  <body class="bg-white">
-    <main class="prose prose-neutral mx-auto px-4 py-8">
-      <slot />
-    </main>
-
-    <!-- 코드 복사 버튼 스크립트 -->
-    <script type="module" src={Astro.base + 'scripts/copy-code.js'}></script>
+  <head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><Seo title={`${title} | Astroxx`} description={description} /></head>
+  <body>
+    <header class="site-header"><div class="header-inner">
+      <a class="wordmark" href={sitePath('/')} aria-label="Astroxx 홈">astroxx<span>·</span></a>
+      <nav class="main-nav" aria-label="주 메뉴">{nav.map((item) => <a class:list={[{ active: item.href === '/' ? path === '/' : path.startsWith(item.href.slice(0, -1)) }, 'nav-link']} href={sitePath(item.href)}>{item.label}</a>)}</nav>
+      <a class="header-note" href="mailto:hello@example.com">연락하기 <span aria-hidden="true">↗</span></a>
+    </div></header>
+    <main><slot /></main>
+    <script type="module" src={sitePath('scripts/copy-code.js')}></script>
   </body>
 </html>
-

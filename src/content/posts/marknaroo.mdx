@@ -1,0 +1,27 @@
+---
+title: "하나의 마크다운 뷰어, 두 가지 사용 방식"
+date: "2026-11-05"
+kind: project
+tags: [marknaroo, markdown, typescript]
+description: "공유 렌더링 코어를 Chrome 확장과 standalone PWA로 나누어 로컬 마크다운을 읽도록 만든 MarkNaroo."
+---
+
+MarkNaroo는 마크다운 파일을 브라우저에서 읽기 좋게 보여주는 뷰어다. Chrome 확장과 standalone PWA 두 형태로 제공하지만, 문서를 해석하고 그리는 핵심은 공유 코어에 두었다.
+
+## 읽기 경험을 코어로 묶기
+
+공유 코어는 GFM 표와 체크리스트, 코드 강조, KaTeX 수식, Mermaid 다이어그램, 자동 목차와 스크롤 위치 표시를 처리한다. 라이트·다크·시스템 테마와 사용자 CSS도 지원한다. HTML은 정화해 렌더링하고, 문서 내용과 파일 경로는 외부로 보내지 않는 것을 원칙으로 삼았다.
+
+두 앱이 같은 코어를 쓰도록 해 렌더링과 설정은 한 곳에서 다듬고, 각 앱은 파일을 여는 방식에 집중하게 했다.
+
+## 확장과 PWA의 역할
+
+Chrome 확장은 `file://` 문서나 raw 마크다운 URL을 브라우저에서 바로 연다. standalone PWA는 파일 선택과 드래그앤드롭, 설치 후 운영체제의 마크다운 파일 연결을 맡는다. 같은 문서 읽기 기능을 서로 다른 진입 방식으로 제공한다.
+
+두 로컬 폴더 `markdown-reader`와 `markdown-reader-standalone`은 같은 MarkNaroo 저장소의 사본으로 확인되어, 아카이브에서는 하나의 프로젝트로 묶었다.
+
+## 화면보다 먼저 챙긴 것
+
+마크다운 뷰어는 문서의 내용이 중심이므로, 목차 이동과 테마, 파일이 바뀌었을 때 스크롤을 유지하는 동작처럼 읽기를 방해하지 않는 세부를 중요하게 두었다. 또한 외부 CDN에 기대지 않고 오프라인에서도 동작하도록 필요한 리소스를 번들에 포함했다.
+
+[MarkNaroo PWA 열기](https://neisii.github.io/marknaroo-app/)

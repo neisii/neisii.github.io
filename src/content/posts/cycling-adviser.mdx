@@ -1,0 +1,13 @@
+---
+title: "날씨를 라이딩 판단으로 바꾸는 Cycling Adviser"
+date: "2026-11-06"
+kind: project
+tags: [cycling, weather, frontend]
+description: "한국 8개 도시의 날씨를 라이딩 적합도, 복장 추천과 3일 예보로 보여주는 프런트엔드."
+---
+
+라이딩 전에 기온만 보고 나섰다가 강한 바람이나 비 때문에 계획을 바꾸는 일을 줄이기 위해, 여러 날씨 조건을 한눈에 확인하는 Cycling Adviser를 만들었다.
+
+앱은 한국 8개 주요 도시를 지원한다. 기온, 체감온도, 풍속, 강수량과 확률, 습도, 자외선을 합산해 0–100점 적합도와 5단계 판정을 보여주고, 보온과 방수 특성을 고려한 복장 추천 및 3일 예보를 제공한다.
+
+프런트엔드는 React와 Vite로 구성했고 TanStack Query로 API 데이터를 가져온다. 화면은 Cloudflare Pages에 배포했고 날씨 데이터는 별도 Cloudflare Worker 백엔드인 [Weather Proxy](https://weather-proxy.neisii.workers.dev)를 사용한다.

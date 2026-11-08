@@ -1,28 +1,33 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { sitePath } from '../lib/paths';
 import { getCollection } from 'astro:content';
-
-const posts = (await getCollection('posts'))
-  .sort((a,b) => (a.data.date < b.data.date ? 1 : -1));
+import { projects } from '../data/projects';
+const sortedProjects = [...projects].sort((a, b) => b.date.localeCompare(a.date));
+const posts = (await getCollection('posts')).filter((post) => post.data.kind === 'article').sort((a, b) => b.data.date.localeCompare(a.data.date));
 ---
-<BaseLayout title="Astroxx Blog">
-  <section class="max-w-screen-md mx-auto">
-    <h1 class="!mb-6">Posts</h1>
-    <ul class="not-prose divide-y">
-      {posts.map(p => (
-        <li class="py-4">
-          <a class="block hover:underline" href={`/posts/${p.slug}/`}>
-            <h2 class="text-lg font-semibold">{p.data.title}</h2>
-          </a>
-          <p class="text-sm text-gray-500">{p.data.date}</p>
-          {p.data.tags?.length && (
-            <div class="mt-1 flex gap-2 flex-wrap">
-              {p.data.tags.map(t => <a href={`/tags/${t}/`} class="text-xs bg-gray-100 px-2 py-1 rounded hover:underline">#{t}</a>)}
-            </div>
-          )}
-        </li>
-      ))}
-    </ul>
-  </section>
+<BaseLayout>
+  <div class="archive-shell">
+    <section class="hero">
+      <p class="eyebrow">PERSONAL ARCHIVE <span>—</span> 2026</p>
+      <h1>만들고, 기록합니다.</h1>
+      <p class="hero-copy">작은 아이디어를 작동하는 것으로 만들고,<br class="desktop-break" /> 그 과정에서 배운 것을 글로 남깁니다.</p>
+      <a class="text-link" href={sitePath('/projects/')}>프로젝트 둘러보기 <span aria-hidden="true">↗</span></a>
+      <span class="hero-index" aria-hidden="true">Nº 01<br />WORK &amp; NOTES</span>
+    </section>
+    <section class="home-section" aria-labelledby="projects-heading">
+      <div class="section-heading"><div><p class="eyebrow">SELECTED WORK</p><h2 id="projects-heading">프로젝트</h2></div><a class="text-link" href={sitePath('/projects/')}>모두 보기 <span aria-hidden="true">→</span></a></div>
+      <div class="project-grid">{sortedProjects.slice(0, 2).map((project) => <a class="project-card" href={sitePath(`/projects/${project.slug}/`)}>
+        <div class:list={['project-cover', { 'has-image': Boolean(project.image), wide: project.imageMode === 'wide' }]} style={`--cover:${project.color}`}>
+          {project.image ? (project.imageMode === 'wide' ? <img class="cover-image" src={sitePath(project.image)} alt={project.imageAlt ?? `${project.name} 화면`} /> : <><div class="image-caption"><span class="cover-name">{project.name}</span><span>프로젝트 화면</span></div><img class="cover-image" src={sitePath(project.image)} alt={project.imageAlt ?? `${project.name} 화면`} /></>) : <><span class="cover-name">{project.name}</span><span class="cover-mark">{project.mark}</span><span class="cover-caption">작업 기록　·　{project.period}</span></>}
+        </div>
+        <p class="card-meta">{project.period} <span>·</span> {project.type}</p><h3>{project.title}</h3><p class="muted">{project.summary}</p>
+      </a>)}</div>
+    </section>
+    <section class="home-section writing-section" aria-labelledby="writing-heading">
+      <div class="section-heading"><div><p class="eyebrow">FIELD NOTES</p><h2 id="writing-heading">최근 글</h2></div><a class="text-link" href={sitePath('/posts/')}>글 모두 보기 <span aria-hidden="true">→</span></a></div>
+      <ul class="entry-list">{posts.slice(0, 4).map((post) => <li><a href={sitePath(`/posts/${post.slug}/`)}><time datetime={post.data.date}>{post.data.date}</time><span class="entry-title">{post.data.title}</span><span class="entry-arrow" aria-hidden="true">↗</span></a></li>)}</ul>
+    </section>
+    <footer class="home-footer"><span>천천히 만들고 오래 씁니다.</span><a href="mailto:hello@example.com">편하게 인사하기 ↗</a></footer>
+  </div>
 </BaseLayout>
-

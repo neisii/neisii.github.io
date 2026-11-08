@@ -1,42 +1,21 @@
 ---
-import { getCollection, getEntryBySlug } from "astro:content";
+import { getCollection } from 'astro:content';
 import PostLayout from '../../layouts/PostLayout.astro';
-import Toc from '../../components/Toc.astro';
-
-export async function getStaticPaths() {
-  const posts = await getCollection("posts");
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-  }));
-}
-
+import { sitePath } from '../../lib/paths';
+export async function getStaticPaths() { const posts = await getCollection('posts'); return posts.map((post) => ({ params: { slug: post.slug } })); }
 const { slug } = Astro.params;
-const post = await getEntryBySlug("posts", slug);
+const post = await getCollection('posts').then((items) => items.find((item) => item.slug === slug));
 if (!post) throw new Error(`Post not found for slug: ${slug}`);
-
-const rendered = await post.render(); // { Content, headings, ... }
-const { Content, headings } = rendered;
+const { Content, headings } = await post.render();
 ---
-<PostLayout title={post.data.title} description={post.data.description ?? ""}>
-  <article class="max-w-screen-md mx-auto">
-    <header class="mb-8">
-      <h1 class="!mb-2">{post.data.title}</h1>
-      <p class="text-sm text-gray-500">{post.data.date}</p>
-      {post.data.tags?.length && (
-        <div class="mt-2 flex gap-2 flex-wrap">
-          {post.data.tags.map((t) => <a href={`/tags/${t}/`} class="text-xs bg-gray-100 px-2 py-1 rounded hover:underline">#{t}</a>)}
-        </div>
-      )}
-    </header>
-
-    <div class="flex flex-col md:flex-row gap-8">
-      <div class="flex-1">
-        <Content />
-      </div>
-      <aside class="w-full md:w-64">
-        <Toc headings={headings} />
-      </aside>
-    </div>
-  </article>
+<PostLayout title={post.data.title} description={post.data.description ?? ''}>
+  <div class="archive-shell page-shell article-shell">
+    <a class="back-link" href={sitePath('/posts/')}>← 글 목록</a>
+    <article>
+      <header class="article-header"><p class="eyebrow">FIELD NOTES <span>·</span> {post.data.date}</p><h1>{post.data.title}</h1>{post.data.description && <p class="article-description">{post.data.description}</p>}
+        {post.data.tags?.length > 0 && <div class="tag-row">{post.data.tags.map((tag) => <a href={sitePath(`/tags/${tag}/`)}>#{tag}</a>)}</div>}
+      </header>
+      <div class="article-layout"><div class="article-body"><Content /></div><aside class="article-toc"><nav class="toc" aria-label="목차"><p class="eyebrow">ON THIS PAGE</p><ul>{headings.filter((heading) => heading.depth === 2 || heading.depth === 3).map((heading) => <li class:list={{ nested: heading.depth === 3 }}><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ul></nav></aside></div>
+    </article>
+  </div>
 </PostLayout>
-
