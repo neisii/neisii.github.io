@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { sitePath } from '../../lib/paths';
+import { projects } from '../../data/projects';
+const sortedProjects = [...projects].sort((a, b) => b.date.localeCompare(a.date));
+---
+<BaseLayout title="프로젝트" description="만든 것과 진행 중인 실험을 모았습니다.">
+  <div class="archive-shell page-shell">
+    <header class="page-intro"><p class="eyebrow">01 / PROJECTS</p><h1>프로젝트</h1><p>생각을 구체적인 결과로 옮긴 작업을 모았습니다.<br />완성된 화면과 함께 그 안에 담긴 선택도 기록합니다.</p></header>
+    <div class="project-grid project-grid-list">{sortedProjects.map((project) => <a class="project-card" href={sitePath(`/projects/${project.slug}/`)}>
+      <div class:list={['project-cover', { 'has-image': Boolean(project.image), wide: project.imageMode === 'wide' }]} style={`--cover:${project.color}`}>
+          {project.image ? (project.imageMode === 'wide' ? <img class="cover-image" src={sitePath(project.image)} alt={project.imageAlt ?? `${project.name} 화면`} /> : <><div class="image-caption"><span class="cover-name">{project.name}</span><span>프로젝트 화면</span></div><img class="cover-image" src={sitePath(project.image)} alt={project.imageAlt ?? `${project.name} 화면`} /></>) : <><span class="cover-name">{project.name}</span><span class="cover-mark">{project.mark}</span><span class="cover-caption">작업 기록　·　{project.period}</span></>}
+        </div>
+      <p class="card-meta">{project.period} <span>·</span> {project.type}</p><h2>{project.title}</h2><p class="muted">{project.summary}</p>
+    </a>)}</div>
+  </div>
+</BaseLayout>

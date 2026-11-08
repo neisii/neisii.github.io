@@ -1,0 +1,15 @@
+---
+title: "세 날씨 API를 하나의 예보로 집계하기"
+date: "2026-11-06"
+kind: project
+tags: [backend, cloudflare, weather]
+description: "OpenWeather, WeatherAPI, Open-Meteo를 병렬 조회해 정규화하고 신뢰도에 따라 가중 집계하는 Worker API."
+---
+
+Cycling Adviser가 한 날씨 제공자에만 의존하지 않도록 세 제공자의 데이터를 모아 응답하는 Cloudflare Worker를 만들었다.
+
+OpenWeather, WeatherAPI, Open-Meteo를 병렬 조회해 기온·풍속·습도별 가중치로 집계한다. 한 제공자가 실패하거나 이상값을 반환하면 그 가중치를 나머지 응답에 재분배해 가능한 데이터로 결과를 구성한다.
+
+현재 날씨와 최대 3일 예보, 도시 목록, 헬스 체크 API를 만들었다. 현재 날씨는 5분, 예보는 30분 동안 메모리 캐시에 보관한다. 진단용 원본 응답에는 API 키 인증을 요구하고 클라이언트에는 집계 API만 공개했다.
+
+[Weather Proxy 프로덕션 엔드포인트](https://weather-proxy.neisii.workers.dev)

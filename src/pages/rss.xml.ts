@@ -3,25 +3,16 @@ import { getCollection } from 'astro:content';
 import type { APIContext } from 'astro';
 
 export async function GET(context: APIContext) {
-  const posts = await getCollection('posts');
-
+  const posts = (await getCollection('posts')).filter((post) => post.data.kind === 'article').sort((a, b) => b.data.date.localeCompare(a.data.date));
   return rss({
-    // 피드 메타
-    title: 'Astroxx Blog',
-    description: 'Zenn 스타일의 미니 블로그',
-    site: context.site, // astro.config.mjs의 site 값 사용
-
-    // 아이템
+    title: 'Astroxx · 글과 작업 노트',
+    description: '만든 것과 기록한 생각을 모아두는 개인 아카이브.',
+    site: context.site ?? 'https://neisii.github.io/astroxx',
     items: posts.map((post) => ({
-      link: `/posts/${post.slug}/`,
       title: post.data.title,
+      description: post.data.description ?? '',
       pubDate: new Date(post.data.date),
-      description: (post.data as any).description ?? '', // 선택 필드면 안전하게
+      link: `${context.site ?? 'https://neisii.github.io/astroxx'}/posts/${post.slug}/`,
     })),
-
-    // 선택: 피드 경로/언어 등 커스터마이징 가능
-    stylesheet: undefined,
-    customData: undefined,
   });
 }
-

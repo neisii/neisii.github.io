@@ -1,18 +1,5 @@
 ---
-/** headings: Array<{ depth: number; slug: string; text: string }> 기대 */
 const { headings = [] } = Astro.props;
-const items = headings.filter(h => h.depth === 2 || h.depth === 3);
+const items = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
 ---
-{items.length > 0 && (
-  <nav class="text-sm sticky top-24">
-    <h2 class="text-base font-semibold mb-2">목차</h2>
-    <ul class="space-y-1">
-      {items.map(h => (
-        <li class={`ml-${h.depth === 3 ? '3' : '0'}`}>
-          <a class="text-blue-600 hover:underline" href={`#${h.slug}`}>{h.text}</a>
-        </li>
-      ))}
-    </ul>
-  </nav>
-)}
-
+{items.length > 0 && <nav class="toc" aria-label="목차"><p class="eyebrow">ON THIS PAGE</p><ul>{items.map((heading) => <li class:list={{ nested: heading.depth === 3 }}><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ul></nav>}
