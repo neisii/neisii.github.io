@@ -19,6 +19,17 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: 'harness-naroo', name: 'HARNESS NAROO', date: '2026-11-22',
+    title: 'AI 에이전트의 결과가 전체와 맞물리는지 확인하기', period: '2026 — 진행 중', type: '개발 도구 · Claude Code 플러그인',
+    summary: 'AI 에이전트가 "완료"라고 한 결과가 시스템 전체의 정합성을 깨지 않는지 확인하는 Claude Code 하네스.',
+    description: 'SI 사업에서 AI 세션 여러 개로 화면을 개발하며 쌓은 규칙을 Claude Code 플러그인으로 정리해 공개했다. 청사진을 사람이 승인하기 전에는 구현하지 않고, 확인한 것만 확인했다고 쓰며, 커밋 전에 작업 대화를 물려받지 않은 AI가 다시 검증한다. 되돌릴 수 없는 일, 모호한 요구, 사람이 정할 업무 결정 앞에서는 멈추고 묻는다. 0.2.0부터 여러 세션을 사람의 결정 아래 나눠 쓰는 구성과 초심자 안내서를 넣었고, 공개 저장소에서 실무자 세션 넷이 서로 영향을 주는 작업을 끝까지 다루는 시험을 거쳤다.',
+    color: '#e8eae6', mark: '◎', role: '개인 프로젝트 · 설계 및 개발', stack: ['Claude Code 플러그인', 'Python', 'Markdown 규칙', 'Mermaid'],
+    links: [
+      { label: 'GitHub 저장소', href: 'https://github.com/neisii/harness-naroo' },
+      { label: '5분 맛보기', href: 'https://github.com/neisii/harness-naroo/blob/main/QUICKSTART.md' },
+    ],
+  },
+  {
     slug: 'status-relay',
     date: '2026-11-05',
     name: 'STATUS RELAY',
