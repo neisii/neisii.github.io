@@ -21,8 +21,9 @@ jobs:
       - name: Install, build, and upload your site
         uses: withastro/action@v3
         with:
-          # pnpm 버전은 package.json의 packageManager 한 곳에서만 정한다(두 곳에 쓰면 설치 단계가 거부한다).
-          package-manager: pnpm
+          # package-manager는 적지 않는다. 적으면 withastro/action이 버전 없는 값에 "latest"를 채워
+          # package.json의 packageManager(pnpm 12.16.1)와 두 곳 지정으로 거부된다. 비워 두면 잠금 파일로
+          # pnpm을 고르고, pnpm/action-setup이 packageManager의 버전을 쓴다(withastro/action v3 action.yml).
           node-version: 22
 
   deploy:
