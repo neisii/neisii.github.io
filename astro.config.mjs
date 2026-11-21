@@ -5,10 +5,17 @@ import sitemap from '@astrojs/sitemap';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 
+// GitHub Pages 주소는 저장소 이름에서 정한다. GitHub Actions는 GITHUB_REPOSITORY("소유자/저장소")를 알려 준다.
+// 저장소 이름이 "<소유자>.github.io"면 사용자 사이트(루트 /), 아니면 프로젝트 사이트(/<저장소>/).
+// 로컬 빌드처럼 값이 없으면 neisii/astroxx로 본다.
+const [owner, repo] = (process.env.GITHUB_REPOSITORY || 'neisii/astroxx').split('/');
+const host = `${owner.toLowerCase()}.github.io`;
+const isUserSite = repo.toLowerCase() === host;
+
 export default defineConfig({
   output: 'static',
-  base: '/astroxx/',
-  site: 'https://neisii.github.io/astroxx',
+  base: isUserSite ? '/' : `/${repo}/`,
+  site: isUserSite ? `https://${host}` : `https://${host}/${repo}`,
   integrations: [
     mdx(),
     tailwind(),

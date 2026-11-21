@@ -21,8 +21,9 @@ jobs:
       - name: Install, build, and upload your site
         uses: withastro/action@v3
         with:
-          package-manager: pnpm@8 # ✅ 꼭 명시해줘야 함
-          node-version: 20
+          # 잠금 파일(lockfileVersion 9.0)과 pnpm-workspace.yaml의 allowBuilds를 만든 판과 맞춘다.
+          package-manager: pnpm@12.16.1
+          node-version: 22
 
   deploy:
     needs: build
