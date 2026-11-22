@@ -1,0 +1,18 @@
+neisii.github.io
+Copyright 2026 Baek Ga-hui (백가희, neisii)
+https://github.com/neisii/neisii.github.io
+
+This site (posts, project write-ups, images, and site code) was written and
+built by Baek Ga-hui (neisii).
+
+Licensing:
+- Site code (src/ except src/content/, configuration, scripts, workflows):
+  Apache License, Version 2.0 (see LICENSE).
+- Posts, project write-ups, and images (src/content/, public/images/, and the
+  text of src/data/projects.ts): Creative Commons Attribution-NonCommercial-
+  NoDerivatives 4.0 International (CC BY-NC-ND 4.0, see LICENSE-CONTENT.md).
+
+If you redistribute the site code or a derivative of it, the Apache License
+(section 4(d)) asks you to keep the attribution notices in this NOTICE file.
+If you share a post or image, credit "Baek Ga-hui (neisii)" with a link to the
+original page, do not use it commercially, and share it unchanged.
