@@ -27,6 +27,7 @@ export const projects: Project[] = [
     links: [
       { label: 'GitHub 저장소', href: 'https://github.com/neisii/harness-naroo' },
       { label: '5분 맛보기', href: 'https://github.com/neisii/harness-naroo/blob/main/QUICKSTART.md' },
+      { label: '바탕이 된 실무 사례', href: 'https://neisii.github.io/projects/ai-dlc-si-portfolio/' },
     ],
   },
   {
@@ -66,10 +67,10 @@ export const projects: Project[] = [
     period: '2026 — 진행 중',
     type: '브라우저 확장 · PWA',
     summary: '공유 렌더링 코어를 바탕으로 로컬 마크다운을 읽는 Chrome 확장과 독립 PWA.',
-    description: '마크다운 파일을 편집하거나 업로드하지 않고 읽을 수 있도록 MarkNaroo를 만들었다. TypeScript 공유 코어에서 GFM, 코드 강조, KaTeX, Mermaid, 목차와 테마를 처리하고, Chrome 확장과 standalone PWA에서 각 환경에 맞게 파일을 연다. 두 로컬 폴더는 같은 프로젝트의 사본이라 하나로 정리했다.',
+    description: '마크다운 파일을 편집하거나 업로드하지 않고 읽을 수 있도록 MarkNaroo를 만들었다. TypeScript 공유 코어에서 GFM, 코드 강조, KaTeX, Mermaid, 목차와 테마를 처리하고, Chrome 확장과 standalone PWA에서 각 환경에 맞게 파일을 연다. 두 로컬 폴더는 같은 프로젝트의 사본이라 하나로 정리했다. Chrome 확장은 Chrome 웹스토어에 공개했다(2026년 11월 20일 기준 0.1.1판, 영어·한국어).',
     color: '#e7e9e3', mark: '¶', role: '개인 프로젝트 · 제품 설계 및 개발', stack: ['TypeScript', 'Vite', 'Chrome MV3', 'PWA', 'Vitest'],
-    image: '/images/projects/marknaroo-extension.png', imageAlt: 'MarkNaroo Chrome 확장에서 마크다운 문서를 라이트 테마로 읽는 화면',
-    links: [{ label: 'PWA 사용해 보기', href: 'https://neisii.github.io/marknaroo-app/' }],
+    image: '/images/projects/marknaroo/promo-marquee-1400x560.png', imageAlt: '회색 픽셀 고양이와 함께 MarkNaroo, Lightweight Markdown viewer for local .md files, Math · Mermaid · Live reload라고 적힌 홍보 이미지', imageMode: 'wide',
+    links: [{ label: 'Chrome 웹스토어', href: 'https://chromewebstore.google.com/detail/marknaroo/dmicfhcicjbdeflfdnkncgpfiomcdnne' }, { label: 'PWA 사용해 보기', href: 'https://neisii.github.io/marknaroo-app/' }],
   },
   {
     slug: 'status-relay-rebuild',
@@ -110,13 +111,14 @@ export const projects: Project[] = [
   },
   {
     slug: 'ai-dlc-si-portfolio', name: 'AI-DLC SI PORTFOLIO', date: '2026-11-06',
-    title: 'AI-DLC 소프트웨어 개선 포트폴리오', period: '2026', type: '웹 포트폴리오',
-    summary: 'AI-DLC를 활용한 소프트웨어 개선 작업을 소개하는 포트폴리오 사이트.',
-    description: 'AI-DLC 기반 소프트웨어 개선 사례를 정리해 공개하는 포트폴리오를 만들었다. 프로젝트의 상세 내용은 사이트에서 확인할 수 있다.',
-    color: '#e7e9ef', mark: '↗', role: '개인 프로젝트', stack: ['AI-DLC', '웹 포트폴리오'],
+    title: 'AI-DLC 개발 체계 구축 (SI 실무 사례)', period: '2026.07 — 10', type: '실무 사례 · 웹 포트폴리오',
+    summary: 'SI 차세대 구축 사업(계약 도메인)에서 AI 세션 운영 체계를 세워 담당 34화면을 일정보다 한 달 앞서 구현한 실무 사례.',
+    description: '처음 맡은 구축형 SI에 도메인 경험 없이 투입돼, AI 세션 여러 개를 역할별로 운영하는 개발 체계를 만들었다. 규칙 13개·스킬 27개·도구 31개로 키웠고, 결정·규칙·도구 제작 권한을 세션마다 나눈 역할 세션 7개를 10분 주기 점검과 함께 운영했다. 담당 34화면 가운데 26화면은 시나리오 검증을 거쳤고, 인계 문서 52편을 남겼다. 사이트에는 성과, 원칙, 경과, 하네스, 사례, 효과와 한계를 정리했다. 이 경험을 누구나 쓸 수 있게 일반화한 도구가 harness-naroo다.',
+    color: '#e7e9ef', mark: '↗', role: '실무 · 개발 체계 설계와 운영', stack: ['Claude Code', 'AI-DLC', 'Spring Boot', 'Playwright'],
     links: [
       { label: '포트폴리오 사이트', href: 'https://neisii.github.io/ai-dlc-si-portfolio/' },
       { label: 'GitHub 저장소', href: 'https://github.com/neisii/ai-dlc-si-portfolio' },
+      { label: '공개 도구로 만든 것: harness-naroo', href: 'https://neisii.github.io/projects/harness-naroo/' },
     ],
   },
   {
