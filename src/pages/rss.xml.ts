@@ -4,7 +4,7 @@ import type { APIContext } from 'astro';
 
 export async function GET(context: APIContext) {
   // 사이트 주소 끝의 /를 뗀다(사용자 사이트는 https://<소유자>.github.io/ 로 끝나 //가 생긴다).
-  const root = String(context.site ?? 'https://neisii.github.io/astroxx').replace(/\/+$/, '');
+  const root = String(context.site ?? 'https://neisii.github.io').replace(/\/+$/, '');
   const posts = (await getCollection('posts')).filter((post) => post.data.kind === 'article').sort((a, b) => b.data.date.localeCompare(a.data.date));
   return rss({
     title: 'Astroxx · 글과 작업 노트',
