@@ -112,7 +112,7 @@ export const projects: Project[] = [
   {
     slug: 'ai-dlc-si-portfolio', name: 'AI-DLC SI PORTFOLIO', date: '2026-11-06',
     title: 'AI-DLC 개발 체계 구축 (SI 실무 사례)', period: '2026.07 — 10', type: '실무 사례 · 웹 포트폴리오',
-    summary: 'SI 차세대 구축 사업(계약 도메인)에서 AI 세션 운영 체계를 세워 담당 34화면을 일정보다 한 달 앞서 구현한 실무 사례.',
+    summary: '준공공 커머스 차세대 구축 사업(계약 도메인)에서 AI 세션 운영 체계를 세워 담당 34화면을 일정보다 한 달 앞서 구현한 실무 사례.',
     description: '처음 맡은 구축형 SI에 도메인 경험 없이 투입돼, AI 세션 여러 개를 역할별로 운영하는 개발 체계를 만들었다. 규칙 13개·스킬 27개·도구 31개로 키웠고, 결정·규칙·도구 제작 권한을 세션마다 나눈 역할 세션 7개를 10분 주기 점검과 함께 운영했다. 담당 34화면 가운데 26화면은 시나리오 검증을 거쳤고, 인계 문서 52편을 남겼다. 사이트에는 성과, 원칙, 경과, 하네스, 사례, 효과와 한계를 정리했다. 이 경험을 누구나 쓸 수 있게 일반화한 도구가 harness-naroo다.',
     color: '#e7e9ef', mark: '↗', role: '실무 · 개발 체계 설계와 운영', stack: ['Claude Code', 'AI-DLC', 'Spring Boot', 'Playwright'],
     links: [
